@@ -26,9 +26,22 @@ class LL {
     this.length++
   }
 
-  // reverse() {
+  // oldTail = 77
+  // 11 -> 33 -> 55 -> 77 -> null
+  // 11 -> 33 -> 55 -> 11 -> null
+  reverse() {
+    let prev = null
+    let next = null
 
-  // }
+    while(this.head) {
+      next = this.head.next
+      this.head.next = prev
+      prev = this.head
+      this.head = this.head.next
+    }
+
+    return prev
+  }
 }
 
 let ll = new LL()
@@ -39,5 +52,10 @@ ll.append(55)
 ll.getLength()
 
 
-console.log('               ')
+
+console.log('                  ')
 console.log('ll: ', ll)
+console.log('ll.reverse: ', ll.reverse())
+console.log('                  ')
+console.log('after reverse: ', ll)
+console.log('                  ')
