@@ -26,21 +26,32 @@ class LL {
     this.length++
   }
 
-  // oldTail = 77
-  // 11 -> 33 -> 55 -> 77 -> null
-  // 11 -> 33 -> 55 -> 11 -> null
   reverse() {
-    let prev = null
-    let next = null
+    let prevNode = null
+    let nextNode = null
+    let currNode = this.head
 
-    while(this.head) {
-      next = this.head.next
-      this.head.next = prev
-      prev = this.head
-      this.head = this.head.next
+    // start from this.head
+    // iterate over LL -> until current node is not null
+    while(currNode) {
+      // save next node in variable
+      nextNode = currNode.next
+
+      // if prev value = null - traverse just started, so head = tail
+      if(prevNode === null) this.tail = this.head
+      // append previously saved node as head's next node
+      currNode.next = prevNode
+
+      // make that previous node current head
+      prevNode = currNode
+      // make next node as current node
+      currNode = nextNode
     }
 
-    return prev
+    // exit while loop -> curr node is null
+    // last node(tail) saved in prevNode var
+    this.head = prevNode
+    return prevNode
   }
 }
 
@@ -48,14 +59,14 @@ let ll = new LL()
 ll.append(11)
 ll.append(33)
 ll.append(55)
-// ll.append(77)
+ll.append(77)
 ll.getLength()
 
 
 
 console.log('                  ')
 console.log('ll: ', ll)
-console.log('ll.reverse: ', ll.reverse())
+ll.reverse()
 console.log('                  ')
 console.log('after reverse: ', ll)
 console.log('                  ')
